@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Infotainment System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Three.js for 3D Model -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/MTLLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+
+<body>
+    <div class="infotainment-screen">
+        <!-- Status Bar -->
+        <header class="status-bar">
+            <div class="status-left">
+                <span class="time" id="current-time">12:47 PM</span>
+                <div class="connection-status">
+                    <span class="signal-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <rect x="1" y="14" width="4" height="8" rx="1" />
+                            <rect x="7" y="10" width="4" height="12" rx="1" />
+                            <rect x="13" y="6" width="4" height="16" rx="1" />
+                            <rect x="19" y="2" width="4" height="20" rx="1" />
+                        </svg>
+                    </span>
+                    <span class="network-type">5G</span>
+                    <span class="signal-bars">4 bars</span>
+                </div>
+                <div class="bluetooth-status">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#00A3FF">
+                        <path
+                            d="M17.71 7.71L12 2h-1v7.59L6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 11 14.41V22h1l5.71-5.71-4.3-4.29 4.3-4.29zM13 5.83l1.88 1.88L13 9.59V5.83zm1.88 10.46L13 18.17v-3.76l1.88 1.88z" />
+                    </svg>
+                    <span>Bluetooth</span>
+                </div>
+            </div>
+            <div class="status-right">
+                <div class="outside-temp">
+                    <span>Outside Temp</span>
+                    <span class="temp-value">21°C</span>
+                </div>
+                <div class="driving-mode">
+                    <span>DRIVING MODE</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Alert Banner -->
+        <div class="alert-banner">
+            <div class="alert-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#FFB800">
+                    <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" />
+                </svg>
+            </div>
+            <span class="alert-text">Alert: Scheduled Maintenance Due in 500km</span>
+        </div>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Left Sidebar Navigation - ENLARGED -->
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-screen="home" data-tooltip="Home / Overview">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                    </svg>
+                    <span class="nav-label">Home</span>
+                </button>
+                <button class="nav-item" data-screen="monitoring" data-tooltip="Monitoring">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z" />
+                    </svg>
+                    <span class="nav-label">Monitor</span>
+                </button>
+                <button class="nav-item" data-screen="controls" data-tooltip="Device Controls">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z" />
+                    </svg>
+                    <span class="nav-label">Controls</span>
+                </button>
+                <button class="nav-item" data-screen="navigation" data-tooltip="Driving Guidance">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21 3L3 10.53v.98l6.84 2.65L12.48 21h.98L21 3z" />
+                    </svg>
+                    <span class="nav-label">Navigate</span>
+                </button>
+                <button class="nav-item" data-screen="automated" data-tooltip="Automated Features">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+                    </svg>
+                    <span class="nav-label">Auto</span>
+                </button>
+                <button class="nav-item" data-screen="mobile" data-tooltip="Mobile Connect">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M15.5 1h-8C6.12 1 5 2.12 5 3.5v17C5 21.88 6.12 23 7.5 23h8c1.38 0 2.5-1.12 2.5-2.5v-17C18 2.12 16.88 1 15.5 1zm-4 21c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5-4H7V4h9v14z" />
+                    </svg>
+                    <span class="nav-label">Mobile</span>
+                </button>
+            </nav>
+
+            <!-- All Screens Container -->
+            <div class="screens-container">
+
+                <!-- HOME / OVERVIEW SCREEN -->
+                <section class="screen active" id="home-screen">
+                    <div class="dashboard">
+                        <div class="vehicle-section">
+                            <div class="car-visualization">
+                                <div class="car-wrapper">
+                                    <!-- 3D Model Canvas -->
+                                    <div id="car-3d-container">
+                                        <div class="loading-indicator" id="loading-indicator">
+                                            <div class="spinner"></div>
+                                            <span>Loading 3D Model...</span>
+                                            <div class="progress-bar-3d">
+                                                <div class="progress-fill-3d" id="load-progress"></div>
+                                            </div>
+                                        </div>
+                                        <canvas id="car-canvas"></canvas>
+                                    </div>
+                                    <div class="car-glow"></div>
+                                </div>
+                            </div>
+                            <div class="vehicle-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">Range:</span>
+                                    <span class="stat-value cyan">450km</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Fuel:</span>
+                                    <span class="stat-value cyan">80%</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Tire Pressure:</span>
+                                    <span class="stat-value green">OK</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-cards">
+                            <div class="card navigation-card">
+                                <div class="card-header">
+                                    <span class="card-label">NEXT DESTINATION:</span>
+                                </div>
+                                <div class="card-content">
+                                    <h2 class="destination-name">Home</h2>
+                                    <p class="destination-info">15 mins via Main St.</p>
+                                </div>
+                                <div class="mini-map">
+                                    <svg viewBox="0 0 100 50" class="map-svg">
+                                        <path d="M10 40 L25 30 L45 35 L65 20 L90 25" stroke="#00A3FF" stroke-width="2"
+                                            fill="none" stroke-linecap="round" />
+                                        <circle cx="90" cy="25" r="4" fill="#00A3FF" />
+                                        <path d="M15 25 L35 20" stroke="#334155" stroke-width="1" fill="none" />
+                                        <path d="M55 40 L75 35" stroke="#334155" stroke-width="1" fill="none" />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="card climate-card">
+                                <div class="card-header">
+                                    <span class="card-label">CLIMATE:</span>
+                                    <div class="ac-badge">A/C</div>
+                                </div>
+                                <div class="card-content">
+                                    <h2 class="climate-temp">22°C</h2>
+                                    <p class="climate-mode">Auto</p>
+                                </div>
+                            </div>
+
+                            <div class="card lights-card">
+                                <div class="card-header">
+                                    <span class="card-label">LIGHTS:</span>
+                                    <div class="lights-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                            <path
+                                                d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                    <h2 class="lights-status">Auto</h2>
+                                    <p class="lights-mode">Mode</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MONITORING SCREEN -->
+                <section class="screen" id="monitoring-screen">
+                    <div class="monitoring-layout">
+                        <h2 class="screen-title">Vehicle Monitoring</h2>
+                        <div class="monitoring-grid">
+                            <!-- Left Column: Tire Pressure (Tall) & Temperature (Short) -->
+                            <div class="monitor-col monitor-col-left">
+                                <!-- Tire Pressure -->
+                                <div class="monitor-card tire-card">
+                                    <h3>Tire Pressure</h3>
+                                    <div class="tire-diagram">
+                                        <div class="tire-visual">
+                                            <div class="car-top-view">
+                                                <svg viewBox="0 0 200 300" class="car-top-svg">
+                                                    <rect x="60" y="40" width="80" height="220" rx="30" fill="#2d3748"
+                                                        stroke="#4a5568" />
+                                                    <rect x="30" y="60" width="25" height="50" rx="8" fill="#1a202c"
+                                                        stroke="#00d4ff" class="tire fl" />
+                                                    <rect x="145" y="60" width="25" height="50" rx="8" fill="#1a202c"
+                                                        stroke="#00d4ff" class="tire fr" />
+                                                    <rect x="30" y="190" width="25" height="50" rx="8" fill="#1a202c"
+                                                        stroke="#00d4ff" class="tire rl" />
+                                                    <rect x="145" y="190" width="25" height="50" rx="8" fill="#1a202c"
+                                                        stroke="#00d4ff" class="tire rr" />
+                                                </svg>
+                                            </div>
+                                            <div class="tire-readings">
+                                                <span class="tire-value fl">32 PSI</span>
+                                                <span class="tire-value fr">32 PSI</span>
+                                                <span class="tire-value rl">31 PSI</span>
+                                                <span class="tire-value rr">32 PSI</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Temperature -->
+                                <div class="monitor-card temp-card">
+                                    <h3>Temperature</h3>
+                                    <div class="temp-info">
+                                        <div class="temp-item">
+                                            <svg width="32" height="32" viewBox="0 0 24 24" fill="#00d4ff">
+                                                <path
+                                                    d="M15 13V5c0-1.66-1.34-3-3-3S9 3.34 9 5v8c-1.21.91-2 2.37-2 4 0 2.76 2.24 5 5 5s5-2.24 5-5c0-1.63-.79-3.09-2-4zm-4-8c0-.55.45-1 1-1s1 .45 1 1h-1v1h1v2h-1v1h1v2h-2V5z" />
+                                            </svg>
+                                            <span class="temp-label">Outside</span>
+                                            <span class="temp-value">21°C</span>
+                                        </div>
+                                        <div class="temp-item">
+                                            <svg width="32" height="32" viewBox="0 0 24 24" fill="#00ff88">
+                                                <path
+                                                    d="M15 13V5c0-1.66-1.34-3-3-3S9 3.34 9 5v8c-1.21.91-2 2.37-2 4 0 2.76 2.24 5 5 5s5-2.24 5-5c0-1.63-.79-3.09-2-4z" />
+                                            </svg>
+                                            <span class="temp-label">Engine</span>
+                                            <span class="temp-value">90°C</span>
+                                        </div>
+                                        <div class="temp-item">
+                                            <svg width="32" height="32" viewBox="0 0 24 24" fill="#ffb800">
+                                                <path
+                                                    d="M15 13V5c0-1.66-1.34-3-3-3S9 3.34 9 5v8c-1.21.91-2 2.37-2 4 0 2.76 2.24 5 5 5s5-2.24 5-5c0-1.63-.79-3.09-2-4z" />
+                                            </svg>
+                                            <span class="temp-label">Cabin</span>
+                                            <span class="temp-value">22°C</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Column: Fuel (Short) & Health (Tall) -->
+                            <div class="monitor-col monitor-col-right">
+                                <!-- Fuel & Range -->
+                                <div class="monitor-card fuel-card">
+                                    <h3>Fuel & Range</h3>
+                                    <div class="fuel-gauge">
+                                        <div class="gauge-circle">
+                                            <svg viewBox="0 0 100 100">
+                                                <circle cx="50" cy="50" r="40" fill="none" stroke="#1a202c"
+                                                    stroke-width="8" />
+                                                <circle cx="50" cy="50" r="40" fill="none" stroke="#00d4ff"
+                                                    stroke-width="8" stroke-dasharray="201" stroke-dashoffset="40"
+                                                    stroke-linecap="round" transform="rotate(-90 50 50)" />
+                                            </svg>
+                                            <div class="gauge-text">
+                                                <span class="gauge-value">80%</span>
+                                                <span class="gauge-label">Fuel</span>
+                                            </div>
+                                        </div>
+                                        <div class="range-info">
+                                            <div class="range-item">
+                                                <span class="range-label">Range</span>
+                                                <span class="range-value">450 km</span>
+                                            </div>
+                                            <div class="range-item">
+                                                <span class="range-label">Avg. Consumption</span>
+                                                <span class="range-value">7.2 L/100km</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Vehicle Health -->
+                                <div class="monitor-card health-card">
+                                    <h3>Vehicle Health</h3>
+                                    <div class="health-list">
+                                        <div class="health-item ok">
+                                            <span class="health-icon">✓</span>
+                                            <span>Engine</span>
+                                            <span class="health-status">OK</span>
+                                        </div>
+                                        <div class="health-item ok">
+                                            <span class="health-icon">✓</span>
+                                            <span>Battery</span>
+                                            <span class="health-status">OK</span>
+                                        </div>
+                                        <div class="health-item warning">
+                                            <span class="health-icon">!</span>
+                                            <span>Oil Level</span>
+                                            <span class="health-status">Check Soon</span>
+                                        </div>
+                                        <div class="health-item ok">
+                                            <span class="health-icon">✓</span>
+                                            <span>Brakes</span>
+                                            <span class="health-status">OK</span>
+                                        </div>
+                                        <!-- Added extra items to fill height -->
+                                        <div class="health-item ok">
+                                            <span class="health-icon">✓</span>
+                                            <span>Transmission</span>
+                                            <span class="health-status">OK</span>
+                                        </div>
+                                        <div class="health-item ok">
+                                            <span class="health-icon">✓</span>
+                                            <span>Coolant</span>
+                                            <span class="health-status">OK</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- DEVICE CONTROLS SCREEN -->
+                <section class="screen" id="controls-screen">
+                    <div class="controls-layout">
+                        <h2 class="screen-title">Device Controls</h2>
+                        <div class="controls-main-container">
+                            <!-- Left Column: Interactive Controls (65%) -->
+                            <div class="controls-column left-panel">
+                                <!-- Climate Control -->
+                                <div class="control-group climate-group">
+                                    <h3>Climate</h3>
+                                    <div class="climate-interactive">
+                                        <div class="temp-adjust">
+                                            <button class="adjust-btn minus">−</button>
+                                            <span class="temp-big">22°</span>
+                                            <button class="adjust-btn plus">+</button>
+                                        </div>
+                                        <div class="climate-toggles">
+                                            <button class="toggle-btn active" data-mode="auto">Auto</button>
+                                            <button class="toggle-btn" data-mode="ac">A/C</button>
+                                            <button class="toggle-btn" data-mode="heat">Heat</button>
+                                            <button class="toggle-btn" data-mode="defrost">Defrost</button>
+                                        </div>
+                                        <div class="fan-slider-compact">
+                                            <span class="icon">💨</span>
+                                            <input type="range" class="slider" min="0" max="5" value="3">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Quick Access Grid -->
+                                <div class="quick-access-grid">
+                                    <!-- Light Controls -->
+                                    <div class="control-group lights-group">
+                                        <h3>Lights</h3>
+                                        <div class="lights-grid">
+                                            <button class="icon-btn active" data-tooltip="Auto">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path
+                                                        d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z" />
+                                                </svg>
+                                                <span>Auto</span>
+                                            </button>
+                                            <button class="icon-btn" data-tooltip="Low Beam">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path
+                                                        d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z" />
+                                                </svg>
+                                                <span>Low</span>
+                                            </button>
+                                            <button class="icon-btn" data-tooltip="Fog Lights">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path
+                                                        d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+                                                </svg>
+                                                <span>Fog</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Doors & Access (NEW) -->
+                                    <div class="control-group doors-group">
+                                        <h3>Doors & Locks</h3>
+                                        <div class="doors-grid">
+                                            <button class="icon-btn" id="lock-btn">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path
+                                                        d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+                                                </svg>
+                                                <span>Lock</span>
+                                            </button>
+                                            <button class="icon-btn" id="trunk-btn">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path
+                                                        d="M19 19h-2v2h2v-2zm0-2h-2v-2h2v2zM6 19H4v2h2v-2zm0-4H4v2h2v-2zm14-4H4c-1.1 0-2 .9-2 2v10h18V13c0-1.1-.9-2-2-2zm0 10H6v-8h16v8zm-5-3h-2v-2h2v2z" />
+                                                </svg>
+                                                <span>Trunk</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Mirrors (NEW) -->
+                                    <div class="control-group mirrors-group">
+                                        <h3>Mirrors</h3>
+                                        <div class="mirrors-grid">
+                                            <button class="icon-btn">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path
+                                                        d="M20 19h-9v-2h9v2zM4 9c2.21 0 4-1.79 4-4S6.21 1 4 1 0 2.79 0 5s1.79 4 4 4zM4 3c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm7 4c-1.1 0-2 .9-2 2v2H5v2h3v5h2v-5h2v-2h-2v-2c0-.55.45-1 1-1s1 .45 1 1v2h2v-2c0-1.66-1.34-3-3-3z" />
+                                                </svg>
+                                                <span>Fold</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Seats -->
+                                    <div class="control-group seats-group">
+                                        <h3>Seats</h3>
+                                        <div class="seats-row">
+                                            <div class="seat-pair">
+                                                <span>Driver</span>
+                                                <div class="seat-actions">
+                                                    <button class="mini-btn text-red active">🔥</button>
+                                                    <button class="mini-btn text-blue">❄️</button>
+                                                </div>
+                                            </div>
+                                            <div class="seat-pair">
+                                                <span>Pass.</span>
+                                                <div class="seat-actions">
+                                                    <button class="mini-btn text-red">🔥</button>
+                                                    <button class="mini-btn text-blue">❄️</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Column: Visual Status (35%) -->
+                            <div class="controls-column right-panel">
+                                <div class="visual-status-card">
+                                    <h3>Vehicle Status</h3>
+                                    <div class="status-visualizer">
+                                        <!-- Top-down car SVG reusing existing asset structure -->
+                                        <svg viewBox="0 0 200 300" class="car-status-svg">
+                                            <!-- Car Body -->
+                                            <rect x="60" y="40" width="80" height="220" rx="30" fill="#1e293b"
+                                                stroke="#334155" stroke-width="2" />
+                                            <!-- Headlights Graphic -->
+                                            <path d="M65 40 L40 10 L80 10 Z" fill="url(#headlight-gradient-left)"
+                                                opacity="0.6" class="headlight-beam left" />
+                                            <path d="M135 40 L160 10 L120 10 Z" fill="url(#headlight-gradient-right)"
+                                                opacity="0.6" class="headlight-beam right" />
+                                            <defs>
+                                                <linearGradient id="headlight-gradient-left" x1="0" y1="1" x2="0"
+                                                    y2="0">
+                                                    <stop offset="0%" stop-color="#fff" stop-opacity="0.8" />
+                                                    <stop offset="100%" stop-color="#fff" stop-opacity="0" />
+                                                </linearGradient>
+                                                <linearGradient id="headlight-gradient-right" x1="0" y1="1" x2="0"
+                                                    y2="0">
+                                                    <stop offset="0%" stop-color="#fff" stop-opacity="0.8" />
+                                                    <stop offset="100%" stop-color="#fff" stop-opacity="0" />
+                                                </linearGradient>
+                                            </defs>
+                                            <!-- Windshield -->
+                                            <path d="M65 80 L135 80 L130 110 L70 110 Z" fill="#0ea5e9" opacity="0.3" />
+                                            <!-- Door Status Indicators -->
+                                            <line x1="60" y1="100" x2="60" y2="150" stroke="#10b981" stroke-width="4" />
+                                            <line x1="140" y1="100" x2="140" y2="150" stroke="#10b981"
+                                                stroke-width="4" />
+                                            <!-- Ambient Light Glow -->
+                                            <circle cx="100" cy="150" r="20" fill="#00d4ff" filter="url(#glow)" />
+                                        </svg>
+                                        <div class="status-labels">
+                                            <div class="status-row">
+                                                <span>Temp</span>
+                                                <span class="highlight">22°C</span>
+                                            </div>
+                                            <div class="status-row">
+                                                <span>Doors</span>
+                                                <span class="highlight text-green">Locked</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ambient-visual">
+                                        <h4>Ambient Light</h4>
+                                        <div class="color-dots">
+                                            <button class="dot-btn red"></button>
+                                            <button class="dot-btn blue active"></button>
+                                            <button class="dot-btn green"></button>
+                                            <button class="dot-btn purple"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- DRIVING GUIDANCE SCREEN -->
+                <section class="screen" id="navigation-screen">
+                    <div class="navigation-layout">
+                        <!-- 3D Perspective Wrapper -->
+                        <div class="map-perspective-wrapper">
+                            <div class="map-plane">
+                                <!-- Enhanced 3D Map SVG -->
+                                <svg viewBox="0 0 1000 1000" class="full-map-3d" preserveAspectRatio="xMidYMid slice">
+                                    <defs>
+                                        <linearGradient id="mapGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#1e293b" />
+                                            <stop offset="100%" style="stop-color:#0f172a" />
+                                        </linearGradient>
+                                        <filter id="glow-route" x="-20%" y="-20%" width="140%" height="140%">
+                                            <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                                            <feMerge>
+                                                <feMergeNode in="coloredBlur" />
+                                                <feMergeNode in="SourceGraphic" />
+                                            </feMerge>
+                                        </filter>
+                                    </defs>
+
+                                    <!-- Dark Background -->
+                                    <rect width="1000" height="1000" fill="url(#mapGradient)" />
+
+                                    <!-- City Grid (Perspective Lines) -->
+                                    <g stroke="#334155" stroke-width="2" opacity="0.3">
+                                        <line x1="100" y1="0" x2="100" y2="1000" />
+                                        <line x1="300" y1="0" x2="300" y2="1000" />
+                                        <line x1="500" y1="0" x2="500" y2="1000" />
+                                        <line x1="700" y1="0" x2="700" y2="1000" />
+                                        <line x1="900" y1="0" x2="900" y2="1000" />
+                                        <line x1="0" y1="200" x2="1000" y2="200" />
+                                        <line x1="0" y1="400" x2="1000" y2="400" />
+                                        <line x1="0" y1="600" x2="1000" y2="600" />
+                                        <line x1="0" y1="800" x2="1000" y2="800" />
+                                    </g>
+
+                                    <!-- Buildings (3D Blocks Extruded) -->
+                                    <g fill="#1e293b" stroke="#475569" stroke-width="1">
+                                        <!-- Left Side Blocks -->
+                                        <path d="M100 600 L250 600 L250 750 L100 750 Z" class="building-base" />
+                                        <path d="M100 600 L120 550 L270 550 L250 600" fill="#334155"
+                                            class="building-roof" />
+                                        <path d="M270 550 L270 700 L250 750 L250 600" fill="#2d3848"
+                                            class="building-side" />
+
+                                        <!-- Right Side Blocks -->
+                                        <path d="M750 200 L900 200 L900 400 L750 400 Z" class="building-base" />
+                                        <path d="M750 200 L770 150 L920 150 L900 200" fill="#334155"
+                                            class="building-roof" />
+                                        <path d="M920 150 L920 350 L900 400 L900 200" fill="#2d3848"
+                                            class="building-side" />
+                                    </g>
+
+                                    <!-- Main Road Path -->
+                                    <path d="M500 1000 L500 600 C500 500 500 400 700 300 L900 200" stroke="#334155"
+                                        stroke-width="80" fill="none" class="road-base" />
+
+                                    <!-- Active Route Line (Glowing Green) -->
+                                    <path d="M500 950 L500 600 C500 500 500 400 700 300 L900 200" stroke="#00ff88"
+                                        stroke-width="20" fill="none" filter="url(#glow-route)" class="route-active"
+                                        stroke-linecap="round" />
+
+                                    <!-- Path Arrows (Direction flow) -->
+                                    <path d="M500 850 L500 800" stroke="#fff" stroke-width="4" marker-end="url(#arrow)"
+                                        opacity="0.5" />
+                                    <path d="M500 700 L500 650" stroke="#fff" stroke-width="4" marker-end="url(#arrow)"
+                                        opacity="0.5" />
+                                </svg>
+
+                                <!-- Car Location Marker (Centered on Screen, but fixed on map plane) -->
+                                <div class="car-marker-3d">
+                                    <div class="marker-ring"></div>
+                                    <div class="marker-arrow"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- UI Overlays (Floating) -->
+                        <div class="nav-overlay-container">
+                            <!-- Top Left: Turn Instruction -->
+                            <div class="nav-card turn-card">
+                                <div class="turn-icon">
+                                    <svg viewBox="0 0 24 24" class="turn-svg">
+                                        <path d="M12 4 L12 14 C12 16 13 17 15 17 L18 17" stroke="white" stroke-width="3"
+                                            fill="none" />
+                                        <path d="M15 14 L18 17 L15 20" stroke="white" stroke-width="3" fill="none" />
+                                    </svg>
+                                </div>
+                                <div class="turn-info">
+                                    <span class="turn-dist">300m</span>
+                                    <span class="turn-street">Turn right onto<br>Main St.</span>
+                                </div>
+                            </div>
+
+                            <!-- Bottom Right: Speed Info -->
+                            <div class="speed-cluster">
+                                <div class="speed-limit">
+                                    <span>50</span>
+                                </div>
+                                <div class="current-speed">
+                                    <span class="speed-val">45</span>
+                                    <span class="speed-unit">km/h</span>
+                                </div>
+                            </div>
+
+                            <!-- Bottom Left: Trip Info -->
+                            <div class="nav-card trip-card">
+                                <div class="trip-time">
+                                    <span class="eta text-green">15 min</span>
+                                    <span class="arrival">1:45 PM</span>
+                                </div>
+                                <div class="trip-dist">
+                                    <span>8.5 km</span>
+                                </div>
+                            </div>
+
+                            <!-- Top Right: Nav Settings/Compass -->
+                            <div class="nav-controls-right">
+                                <button class="nav-circle-btn">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z" />
+                                    </svg>
+                                </button>
+                                <button class="nav-circle-btn">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                </section>
+
+                <!-- AUTOMATED FEATURES SCREEN -->
+                <section class="screen" id="automated-screen">
+                    <div class="automated-layout-v2">
+                        <!-- Center: Sensor Visualization -->
+                        <div class="sensor-display-container">
+                            <div class="sensor-viz-wrapper">
+                                <!-- Radar Waves -->
+                                <div class="radar-pulse-ring ring-1"></div>
+                                <div class="radar-pulse-ring ring-2"></div>
+                                <div class="radar-pulse-ring ring-3"></div>
+
+                                <!-- Lane Lines -->
+                                <div class="lane-line left-line"></div>
+                                <div class="lane-line right-line"></div>
+
+                                <!-- The Car -->
+                                <div class="adas-car-model">
+                                    <!-- Simple SVG Car Top View -->
+                                    <svg viewBox="0 0 100 200" class="adas-car-svg">
+                                        <defs>
+                                            <linearGradient id="carBodyGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                <stop offset="0%" stop-color="#1e293b" />
+                                                <stop offset="50%" stop-color="#334155" />
+                                                <stop offset="100%" stop-color="#1e293b" />
+                                            </linearGradient>
+                                        </defs>
+                                        <path
+                                            d="M20,40 Q20,10 50,10 Q80,10 80,40 L80,160 Q80,190 50,190 Q20,190 20,160 Z"
+                                            fill="url(#carBodyGrad)" stroke="#475569" stroke-width="2" />
+                                        <!-- Windshield -->
+                                        <path d="M25,50 Q50,45 75,50 L70,80 Q50,75 30,80 Z" fill="#0ea5e9"
+                                            opacity="0.6" />
+                                        <!-- Sensor Range Halo -->
+                                        <circle cx="50" cy="50" r="40" fill="none" stroke="#00d4ff" stroke-width="1"
+                                            stroke-dasharray="2,4" opacity="0.5" />
+                                    </svg>
+                                </div>
+
+                                <!-- Detected Objects (Ghosts) -->
+                                <div class="detected-object obj-1"></div>
+                                <div class="detected-object obj-2"></div>
+                            </div>
+                            <div class="system-message">
+                                <span class="status-dot pulsing"></span>
+                                <span class="status-text">Autopilot Ready</span>
+                            </div>
+                        </div>
+
+                        <!-- Left Control Panel -->
+                        <div class="adas-panel left-panel">
+                            <div class="panel-header">
+                                <h3>Autopilot Mode</h3>
+                            </div>
+                            <div class="mode-selector">
+                                <button class="mode-btn active">
+                                    <div class="mode-icon">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12 2L2 22h20L12 2zm0 4l6 12H6l6-12z" />
+                                        </svg>
+                                    </div>
+                                    <span class="mode-name">Traffic Aware</span>
+                                </button>
+                                <button class="mode-btn">
+                                    <div class="mode-icon">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path
+                                                d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.08 3.11H5.77L6.85 7zM19 17H5v-5h14v5z" />
+                                        </svg>
+                                    </div>
+                                    <span class="mode-name">Autosteer</span>
+                                </button>
+                                <button class="mode-btn">
+                                    <div class="mode-icon">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path
+                                                d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
+                                        </svg>
+                                    </div>
+                                    <span class="mode-name">FSD (Beta)</span>
+                                </button>
+                            </div>
+                            <div class="feature-toggles">
+                                <div class="toggle-row">
+                                    <span>Auto Lane Change</span>
+                                    <label class="toggle-switch-sm"><input type="checkbox" checked><span
+                                            class="slider"></span></label>
+                                </div>
+                                <div class="toggle-row">
+                                    <span>Blind Spot Camera</span>
+                                    <label class="toggle-switch-sm"><input type="checkbox" checked><span
+                                            class="slider"></span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Control Panel -->
+                        <div class="adas-panel right-panel">
+                            <div class="panel-header">
+                                <h3>Smart Actions</h3>
+                            </div>
+                            <div class="action-grid">
+                                <button class="action-card">
+                                    <div class="action-icon">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path
+                                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" />
+                                        </svg>
+                                    </div>
+                                    <span>Summon</span>
+                                </button>
+                                <button class="action-card">
+                                    <div class="action-icon">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path
+                                                d="M13 3H6v18h4v-6h3c3.31 0 6-2.69 6-6s-2.69-6-6-6zm.2 8H10V7h3.2c1.1 0 2 .9 2 2s-.9 2-2 2z" />
+                                        </svg>
+                                    </div>
+                                    <span>Auto Park</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Sensitivity Control -->
+                        <div class="adas-bottom-bar">
+                            <div class="sensitivity-label">Following Distance</div>
+                            <div class="sensitivity-control">
+                                <span class="sens-text">Chill</span>
+                                <input type="range" min="1" max="3" value="2" class="sensitivity-slider">
+                                <span class="sens-text">Assertive</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MEDIA & ENTERTAINMENT SCREEN (Formerly Mobile) -->
+                <section class="screen" id="mobile-screen">
+                    <div class="media-hub-layout">
+                        <!-- App Selector Sidebar (App Rail) -->
+                        <div class="app-rail">
+                            <button class="app-icon active" data-app="phone" title="Phone">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z" />
+                                </svg>
+                            </button>
+                            <button class="app-icon" data-app="spotify" title="Spotify">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="#1DB954">
+                                    <path
+                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.59 14.42c-.17.29-.54.38-.83.21-2.28-1.39-5.15-1.71-8.53-.93-.33.08-.66-.14-.73-.46-.07-.33.15-.65.47-.73 3.73-.85 6.94-.46 9.51 1.11.29.17.38.54.21.83zm1.19-2.65c-.23.37-.71.49-1.08.26-2.66-1.63-6.72-2.11-9.86-1.15-.42.13-.87-.11-.99-.53-.13-.42.11-.87.53-.99 3.61-1.11 8.13-.57 11.23 1.33.37.23.49.71.26 1.08zm.1-2.77c-3.19-1.89-8.45-2.07-11.5-.94-.49.18-1.03-.07-1.21-.56-.18-.49.07-1.03.56-1.21 3.52-1.3 9.38-1.1 13.06 1.09.45.27.6.86.33 1.31-.27.46-.86.6-1.24.31z" />
+                                </svg>
+                            </button>
+                            <button class="app-icon" data-app="youtube" title="YouTube">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="#FF0000">
+                                    <path
+                                        d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                                </svg>
+                            </button>
+                            <button class="app-icon" data-app="netflix" title="Netflix">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="#E50914">
+                                    <path d="M16.5 2h-2.5v13l-8-13h-4v20h4v-11l8 13h4v-22z" />
+                                </svg>
+                            </button>
+                            <button class="app-icon" data-app="applemusic" title="Apple Music">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="#FA2D48">
+                                    <path
+                                        d="M15.54 2.8c-7.91 0-11.83 5.42-12.7 8.35-.91-1.03-3.09 4-1.22 8.76.84 2.14 2.92 4.14 5.95 3.96 2.37-.14 3.97-1.34 3.97-1.34s1.65 1.19 4.01 1.36c2.81.19 5.24-2.07 5.97-4.14.73-2.05.69-4.16.59-5.11-.97-9.5-6.67-11.84-6.67-11.84zm-6.28 15.57c-1.33 0-2.42-1.08-2.42-2.42s1.08-2.42 2.42-2.42 2.42 1.08 2.42 2.42-1.08 2.42-2.42 2.42zm7.74 0c-1.33 0-2.42-1.08-2.42-2.42s1.08-2.42 2.42-2.42 2.42 1.08 2.42 2.42-1.08 2.42-2.42 2.42zm-1.57-7.9c-2.49 1.48-6.19 1.5-8.71 0-1.87-1.11-.47-4.59 2.19-5.26 2.91-.72 4.54.49 5.38 1.42 1.25 1.38 2.72 2.87 1.14 3.84z" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Dynamic Content Area -->
+                        <div class="app-content-area">
+
+                            <!-- VIEW 1: PHONE (Default) -->
+                            <div class="app-view active" id="view-phone">
+                                <h2 class="view-title">Connected Devices</h2>
+                                <div class="phone-grid">
+                                    <div class="mobile-card connection-card">
+                                        <div class="device-list">
+                                            <div class="device-item connected">
+                                                <div class="device-icon">
+                                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                                        <path
+                                                            d="M15.5 1h-8C6.12 1 5 2.12 5 3.5v17C5 21.88 6.12 23 7.5 23h8c1.38 0 2.5-1.12 2.5-2.5v-17C18 2.12 16.88 1 15.5 1zm-4 21c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5-4H7V4h9v14z" />
+                                                    </svg>
+                                                </div>
+                                                <div class="device-info">
+                                                    <span class="device-name">iPhone 15 Pro</span>
+                                                    <span class="device-status">Connected via Bluetooth</span>
+                                                </div>
+                                                <button class="disconnect-btn">Disconnect</button>
+                                            </div>
+                                        </div>
+                                        <button class="pair-btn">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                                            </svg>
+                                            Pair New Device
+                                        </button>
+                                    </div>
+                                    <div class="mobile-card notifications-card">
+                                        <h3>Notifications</h3>
+                                        <div class="notification-list">
+                                            <div class="notification-item">
+                                                <div class="notif-icon">💬</div>
+                                                <div class="notif-content">
+                                                    <span class="notif-title">Mom</span>
+                                                    <span class="notif-text">Where are you? Dinner is ready.</span>
+                                                </div>
+                                            </div>
+                                            <div class="notification-item">
+                                                <div class="notif-icon">📅</div>
+                                                <div class="notif-content">
+                                                    <span class="notif-title">Meeting</span>
+                                                    <span class="notif-text">Design Review in 15 mins</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- VIEW 2: MUSIC (Spotify/Apple) -->
+                            <div class="app-view" id="view-music">
+                                <div class="music-player-layout">
+                                    <div class="now-playing-large">
+                                        <div class="album-art-large">
+                                            <div class="art-gradient"></div>
+                                            <span class="music-icon-large">🎵</span>
+                                        </div>
+                                        <div class="track-details-large">
+                                            <h2 class="track-title-large">Blinding Lights</h2>
+                                            <h3 class="artist-name-large">The Weeknd</h3>
+                                        </div>
+                                        <div class="player-controls-large">
+                                            <button class="ctrl-btn-lg">⏮</button>
+                                            <button class="ctrl-btn-lg play-pause">▶</button>
+                                            <button class="ctrl-btn-lg">⏭</button>
+                                        </div>
+                                        <div class="progress-bar-lg">
+                                            <div class="progress-fill" style="width: 45%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="playlist-side">
+                                        <h3>Up Next</h3>
+                                        <ul class="track-list">
+                                            <li class="track-item active">
+                                                <span class="track-num">1</span>
+                                                <div class="track-meta">
+                                                    <span class="t-title">Blinding Lights</span>
+                                                    <span class="t-artist">The Weeknd</span>
+                                                </div>
+                                                <span class="t-time">3:20</span>
+                                            </li>
+                                            <li class="track-item">
+                                                <span class="track-num">2</span>
+                                                <div class="track-meta">
+                                                    <span class="t-title">Save Your Tears</span>
+                                                    <span class="t-artist">The Weeknd</span>
+                                                </div>
+                                                <span class="t-time">3:35</span>
+                                            </li>
+                                            <li class="track-item">
+                                                <span class="track-num">3</span>
+                                                <div class="track-meta">
+                                                    <span class="t-title">Starboy</span>
+                                                    <span class="t-artist">The Weeknd, Daft Punk</span>
+                                                </div>
+                                                <span class="t-time">3:50</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- VIEW 3: VIDEO (YouTube/Netflix) -->
+                            <div class="app-view" id="view-video">
+                                <div class="video-hub-layout">
+                                    <div class="featured-video">
+                                        <div class="video-frame">
+                                            <div class="play-overlay">▶</div>
+                                        </div>
+                                        <div class="video-info">
+                                            <h3>Top Gear: The Ultimate Road Trip</h3>
+                                            <p>Season 22 • Episode 4 • 45m remaining</p>
+                                        </div>
+                                    </div>
+                                    <div class="video-grid">
+                                        <h3>Recommended for You</h3>
+                                        <div class="video-thumbnails">
+                                            <div class="vid-thumb"></div>
+                                            <div class="vid-thumb"></div>
+                                            <div class="vid-thumb"></div>
+                                            <div class="vid-thumb"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+
+            </div>
+        </main>
+
+        <!-- Bottom Navigation / Quick Actions -->
+        <footer class="quick-actions">
+            <button class="action-btn home active">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                </svg>
+                <span>Home</span>
+            </button>
+            <button class="action-btn voice">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z" />
+                </svg>
+                <span>Voice Assistant</span>
+            </button>
+            <div class="volume-control">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+                </svg>
+                <div class="volume-slider">
+                    <div class="volume-track">
+                        <div class="volume-fill"></div>
+                        <div class="volume-thumb"></div>
+                    </div>
+                </div>
+            </div>
+            <button class="action-btn back">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" />
+                </svg>
+                <span>Back</span>
+            </button>
+        </footer>
+    </div>
+
+    <script>
+        // Update time
+        function updateTime() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            document.getElementById('current-time').textContent = `${hours}:${minutes} ${ampm}`;
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        // Screen Navigation
+        const navItems = document.querySelectorAll('.nav-item');
+        const screens = document.querySelectorAll('.screen');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', function () {
+                const screenName = this.dataset.screen;
+
+                // Update nav active state
+                navItems.forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+
+                // Show corresponding screen
+                screens.forEach(screen => screen.classList.remove('active'));
+                document.getElementById(`${screenName}-screen`).classList.add('active');
+            });
+        });
+
+        // Volume slider interaction
+        const volumeSlider = document.querySelector('.volume-slider');
+        const volumeFill = document.querySelector('.volume-fill');
+        const volumeThumb = document.querySelector('.volume-thumb');
+
+        let isDragging = false;
+
+        volumeSlider.addEventListener('mousedown', function (e) {
+            isDragging = true;
+            updateVolume(e);
+        });
+
+        document.addEventListener('mousemove', function (e) {
+            if (isDragging) {
+                updateVolume(e);
+            }
+        });
+
+        document.addEventListener('mouseup', function () {
+            isDragging = false;
+        });
+
+        function updateVolume(e) {
+            const rect = volumeSlider.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+            x = Math.max(0, Math.min(x, rect.width));
+            const percent = (x / rect.width) * 100;
+            volumeFill.style.width = percent + '%';
+            volumeThumb.style.left = percent + '%';
+        }
+
+        // Climate temperature control
+        const tempDisplay = document.getElementById('climate-temp');
+        let currentTemp = 22;
+
+        document.querySelectorAll('.temp-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                if (this.classList.contains('plus') && currentTemp < 30) {
+                    currentTemp++;
+                } else if (this.classList.contains('minus') && currentTemp > 16) {
+                    currentTemp--;
+                }
+                tempDisplay.textContent = currentTemp;
+            });
+        });
+
+        // Climate mode buttons
+        document.querySelectorAll('.climate-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.climate-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Light buttons
+        document.querySelectorAll('.light-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.light-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Seat buttons
+        document.querySelectorAll('.seat-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const parent = this.closest('.seat-options');
+                parent.querySelectorAll('.seat-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Ambient light colors
+        document.querySelectorAll('.color-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // ============================================
+        // THREE.JS 3D CAR MODEL
+        // ============================================
+        function init3DModel() {
+            const container = document.getElementById('car-3d-container');
+            const canvas = document.getElementById('car-canvas');
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const loadProgress = document.getElementById('load-progress');
+
+            if (!container || !canvas) return;
+
+            // Scene setup
+            const scene = new THREE.Scene();
+
+            // Camera
+            const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.set(5, 2, 5);
+            camera.lookAt(0, 0, 0);
+
+            // Renderer
+            const renderer = new THREE.WebGLRenderer({
+                canvas: canvas,
+                antialias: true,
+                alpha: true
+            });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setClearColor(0x000000, 0);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
+            scene.add(ambientLight);
+
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+            directionalLight.position.set(5, 10, 5);
+            directionalLight.castShadow = true;
+            scene.add(directionalLight);
+
+            const directionalLight2 = new THREE.DirectionalLight(0x00d4ff, 0.5);
+            directionalLight2.position.set(-5, 5, -5);
+            scene.add(directionalLight2);
+
+            // Cyan accent light from below
+            const pointLight = new THREE.PointLight(0x00d4ff, 1.2, 15);
+            pointLight.position.set(0, -2, 0);
+            scene.add(pointLight);
+
+            // Additional rim lights for better visibility
+            const rimLight1 = new THREE.PointLight(0x00d4ff, 0.5, 10);
+            rimLight1.position.set(-3, 1, 0);
+            scene.add(rimLight1);
+
+            const rimLight2 = new THREE.PointLight(0x00d4ff, 0.5, 10);
+            rimLight2.position.set(3, 1, 0);
+            scene.add(rimLight2);
+
+            let carModel = null;
+            let isModelLoaded = false;
+
+            // Loading Manager
+            const loadingManager = new THREE.LoadingManager();
+
+            loadingManager.onProgress = function (url, itemsLoaded, itemsTotal) {
+                const progress = (itemsLoaded / itemsTotal) * 100;
+                if (loadProgress) {
+                    loadProgress.style.width = progress + '%';
+                }
+            };
+
+            loadingManager.onLoad = function () {
+                setTimeout(() => {
+                    if (loadingIndicator) {
+                        loadingIndicator.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingIndicator.style.display = 'none';
+                        }, 300);
+                    }
+                    isModelLoaded = true;
+                }, 500);
+            };
+
+            loadingManager.onError = function (url) {
+                console.error('Error loading:', url);
+                if (loadingIndicator) {
+                    loadingIndicator.innerHTML = '<span style="color: #ff4757;">Failed to load model</span>';
+                }
+            };
+
+            // Load OBJ with MTL
+            const mtlLoader = new THREE.MTLLoader(loadingManager);
+            mtlLoader.setPath('./');
+
+            mtlLoader.load('Avent_sport.mtl', function (materials) {
+                materials.preload();
+
+                // Apply custom materials for better appearance
+                Object.keys(materials.materials).forEach(key => {
+                    const mat = materials.materials[key];
+                    mat.side = THREE.DoubleSide;
+
+                    // Make body metallic
+                    if (key === 'body' || key === 'main' || key.includes('spoil')) {
+                        mat.color = new THREE.Color(0x1a1a2e);
+                        mat.shininess = 100;
+                    }
+                    // Make chrome reflective
+                    if (key === 'chrome' || key.includes('MSS')) {
+                        mat.color = new THREE.Color(0x888888);
+                        mat.shininess = 200;
+                    }
+                    // Make glass transparent
+                    if (key === 'glass') {
+                        mat.transparent = true;
+                        mat.opacity = 0.3;
+                        mat.color = new THREE.Color(0x88ccff);
+                    }
+                    // Make lights glow
+                    if (key.includes('LICHTER') || key.includes('light')) {
+                        mat.emissive = new THREE.Color(0x00d4ff);
+                        mat.emissiveIntensity = 0.5;
+                    }
+                });
+
+                const objLoader = new THREE.OBJLoader(loadingManager);
+                objLoader.setMaterials(materials);
+                objLoader.setPath('./');
+
+                objLoader.load('Avent_sport.obj', function (object) {
+                    carModel = object;
+
+                    // Center and scale the model
+                    const box = new THREE.Box3().setFromObject(carModel);
+                    const center = box.getCenter(new THREE.Vector3());
+                    const size = box.getSize(new THREE.Vector3());
+
+                    // Scale to fit container - LARGER SIZE
+                    const maxDim = Math.max(size.x, size.y, size.z);
+                    const scale = 8 / maxDim;
+                    carModel.scale.setScalar(scale);
+
+                    // Center the model
+                    carModel.position.x = -center.x * scale;
+                    carModel.position.y = -center.y * scale;
+                    carModel.position.z = -center.z * scale;
+
+                    // Enable shadows
+                    carModel.traverse(function (child) {
+                        if (child.isMesh) {
+                            child.castShadow = true;
+                            child.receiveShadow = true;
+                        }
+                    });
+
+                    scene.add(carModel);
+
+                }, function (xhr) {
+                    // Progress callback
+                    if (xhr.lengthComputable) {
+                        const percentComplete = (xhr.loaded / xhr.total) * 100;
+                        if (loadProgress) {
+                            loadProgress.style.width = percentComplete + '%';
+                        }
+                    }
+                }, function (error) {
+                    console.error('Error loading OBJ:', error);
+                });
+
+            }, function (xhr) {
+                // MTL loading progress
+            }, function (error) {
+                console.error('Error loading MTL:', error);
+            });
+
+            // Orbit Controls (optional - for user interaction)
+            let controls = null;
+            if (typeof THREE.OrbitControls !== 'undefined') {
+                controls = new THREE.OrbitControls(camera, renderer.domElement);
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.05;
+                controls.enableZoom = false;
+                controls.enablePan = false;
+                controls.autoRotate = true;
+                controls.autoRotateSpeed = 0.5;
+                controls.minPolarAngle = Math.PI / 3;
+                controls.maxPolarAngle = Math.PI / 2;
+            }
+
+            // Animation loop
+            let rotationAngle = 0;
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                // Auto-rotate car if no controls
+                if (carModel && !controls) {
+                    rotationAngle += 0.003;
+                    carModel.rotation.y = rotationAngle;
+                }
+
+                if (controls) {
+                    controls.update();
+                }
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            // Handle resize
+            window.addEventListener('resize', function () {
+                if (container) {
+                    camera.aspect = container.clientWidth / container.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(container.clientWidth, container.clientHeight);
+                }
+            });
+        }
+
+        // Initialize 3D model when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init3DModel);
+        } else {
+            init3DModel();
+        }
+    </script>
+    <script>
+        // Media Hub Interaction Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const appIcons = document.querySelectorAll('.app-icon');
+            const appViews = document.querySelectorAll('.app-view');
+
+            // App Switching
+            appIcons.forEach(icon => {
+                icon.addEventListener('click', () => {
+                    // Remove active class from all icons
+                    appIcons.forEach(i => i.classList.remove('active'));
+                    // Add active class to clicked icon
+                    icon.classList.add('active');
+
+                    // Determine target view
+                    const appName = icon.dataset.app;
+                    let targetViewId = 'view-phone'; // Default
+
+                    if (appName === 'spotify' || appName === 'applemusic') {
+                        targetViewId = 'view-music';
+                    } else if (appName === 'youtube' || appName === 'netflix') {
+                        targetViewId = 'view-video';
+                    }
+
+                    // Hide all views
+                    appViews.forEach(view => view.classList.remove('active'));
+                    // Show target view
+                    const targetView = document.getElementById(targetViewId);
+                    if (targetView) targetView.classList.add('active');
+                });
+            });
+
+            // Music Player - Play/Pause Toggle
+            const playBtn = document.querySelector('.play-pause');
+            if (playBtn) {
+                playBtn.addEventListener('click', () => {
+                    if (playBtn.textContent === '▶') {
+                        playBtn.textContent = '⏸';
+                    } else {
+                        playBtn.textContent = '▶';
+                    }
+                });
+            }
+
+            // Playlist Selection
+            const trackItems = document.querySelectorAll('.track-item');
+            trackItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    trackItems.forEach(t => t.classList.remove('active'));
+                    item.classList.add('active');
+                    // Optional: Update Now Playing text based on selected track
+                    const title = item.querySelector('.t-title').textContent;
+                    const artist = item.querySelector('.t-artist').textContent;
+                    document.querySelector('.track-title-large').textContent = title;
+                    document.querySelector('.artist-name-large').textContent = artist;
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

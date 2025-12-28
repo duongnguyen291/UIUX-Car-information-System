@@ -1,0 +1,5 @@
+# Cách chạy
+```
+npx serve .
+
+```
