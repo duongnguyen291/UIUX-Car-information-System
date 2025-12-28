@@ -786,171 +786,47 @@
                     </div>
                 </section>
 
-                <!-- MEDIA & ENTERTAINMENT SCREEN (Formerly Mobile) -->
+                <!-- CARPLAY / MOBILE CONNECT SCREEN -->
                 <section class="screen" id="mobile-screen">
-                    <div class="media-hub-layout">
-                        <!-- App Selector Sidebar (App Rail) -->
-                        <div class="app-rail">
-                            <button class="app-icon active" data-app="phone" title="Phone">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                                    <path
-                                        d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z" />
-                                </svg>
-                            </button>
-                            <button class="app-icon" data-app="spotify" title="Spotify">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="#1DB954">
-                                    <path
-                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.59 14.42c-.17.29-.54.38-.83.21-2.28-1.39-5.15-1.71-8.53-.93-.33.08-.66-.14-.73-.46-.07-.33.15-.65.47-.73 3.73-.85 6.94-.46 9.51 1.11.29.17.38.54.21.83zm1.19-2.65c-.23.37-.71.49-1.08.26-2.66-1.63-6.72-2.11-9.86-1.15-.42.13-.87-.11-.99-.53-.13-.42.11-.87.53-.99 3.61-1.11 8.13-.57 11.23 1.33.37.23.49.71.26 1.08zm.1-2.77c-3.19-1.89-8.45-2.07-11.5-.94-.49.18-1.03-.07-1.21-.56-.18-.49.07-1.03.56-1.21 3.52-1.3 9.38-1.1 13.06 1.09.45.27.6.86.33 1.31-.27.46-.86.6-1.24.31z" />
-                                </svg>
-                            </button>
-                            <button class="app-icon" data-app="youtube" title="YouTube">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="#FF0000">
-                                    <path
-                                        d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
-                                </svg>
-                            </button>
-                            <button class="app-icon" data-app="netflix" title="Netflix">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="#E50914">
-                                    <path d="M16.5 2h-2.5v13l-8-13h-4v20h4v-11l8 13h4v-22z" />
-                                </svg>
-                            </button>
-                            <button class="app-icon" data-app="applemusic" title="Apple Music">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="#FA2D48">
-                                    <path
-                                        d="M15.54 2.8c-7.91 0-11.83 5.42-12.7 8.35-.91-1.03-3.09 4-1.22 8.76.84 2.14 2.92 4.14 5.95 3.96 2.37-.14 3.97-1.34 3.97-1.34s1.65 1.19 4.01 1.36c2.81.19 5.24-2.07 5.97-4.14.73-2.05.69-4.16.59-5.11-.97-9.5-6.67-11.84-6.67-11.84zm-6.28 15.57c-1.33 0-2.42-1.08-2.42-2.42s1.08-2.42 2.42-2.42 2.42 1.08 2.42 2.42-1.08 2.42-2.42 2.42zm7.74 0c-1.33 0-2.42-1.08-2.42-2.42s1.08-2.42 2.42-2.42 2.42 1.08 2.42 2.42-1.08 2.42-2.42 2.42zm-1.57-7.9c-2.49 1.48-6.19 1.5-8.71 0-1.87-1.11-.47-4.59 2.19-5.26 2.91-.72 4.54.49 5.38 1.42 1.25 1.38 2.72 2.87 1.14 3.84z" />
-                                </svg>
-                            </button>
+                    <div class="carplay-launcher">
+                        <h2 class="screen-title">CarPlay & Android Auto</h2>
+                        <p class="carplay-subtitle">Connect your device to access apps and features</p>
+
+                        <div class="carplay-options">
+                            <!-- iOS CarPlay Option -->
+                            <div class="carplay-option ios" onclick="openCarPlay('ios')">
+                                <div class="carplay-icon-wrapper ios-icon">
+                                    <svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                                    </svg>
+                                </div>
+                                <div class="carplay-option-info">
+                                    <h3>Apple CarPlay</h3>
+                                    <p>Maps, Music, Messages & more</p>
+                                </div>
+                                <div class="carplay-arrow">→</div>
+                            </div>
+
+                            <!-- Android Auto Option -->
+                            <div class="carplay-option android" onclick="openCarPlay('android')">
+                                <div class="carplay-icon-wrapper android-icon">
+                                    <svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z" />
+                                    </svg>
+                                </div>
+                                <div class="carplay-option-info">
+                                    <h3>Android Auto</h3>
+                                    <p>Google Maps, Spotify & more</p>
+                                </div>
+                                <div class="carplay-arrow">→</div>
+                            </div>
                         </div>
 
-                        <!-- Dynamic Content Area -->
-                        <div class="app-content-area">
-
-                            <!-- VIEW 1: PHONE (Default) -->
-                            <div class="app-view active" id="view-phone">
-                                <h2 class="view-title">Connected Devices</h2>
-                                <div class="phone-grid">
-                                    <div class="mobile-card connection-card">
-                                        <div class="device-list">
-                                            <div class="device-item connected">
-                                                <div class="device-icon">
-                                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                                                        <path
-                                                            d="M15.5 1h-8C6.12 1 5 2.12 5 3.5v17C5 21.88 6.12 23 7.5 23h8c1.38 0 2.5-1.12 2.5-2.5v-17C18 2.12 16.88 1 15.5 1zm-4 21c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5-4H7V4h9v14z" />
-                                                    </svg>
-                                                </div>
-                                                <div class="device-info">
-                                                    <span class="device-name">iPhone 15 Pro</span>
-                                                    <span class="device-status">Connected via Bluetooth</span>
-                                                </div>
-                                                <button class="disconnect-btn">Disconnect</button>
-                                            </div>
-                                        </div>
-                                        <button class="pair-btn">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-                                            </svg>
-                                            Pair New Device
-                                        </button>
-                                    </div>
-                                    <div class="mobile-card notifications-card">
-                                        <h3>Notifications</h3>
-                                        <div class="notification-list">
-                                            <div class="notification-item">
-                                                <div class="notif-icon">💬</div>
-                                                <div class="notif-content">
-                                                    <span class="notif-title">Mom</span>
-                                                    <span class="notif-text">Where are you? Dinner is ready.</span>
-                                                </div>
-                                            </div>
-                                            <div class="notification-item">
-                                                <div class="notif-icon">📅</div>
-                                                <div class="notif-content">
-                                                    <span class="notif-title">Meeting</span>
-                                                    <span class="notif-text">Design Review in 15 mins</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- VIEW 2: MUSIC (Spotify/Apple) -->
-                            <div class="app-view" id="view-music">
-                                <div class="music-player-layout">
-                                    <div class="now-playing-large">
-                                        <div class="album-art-large">
-                                            <div class="art-gradient"></div>
-                                            <span class="music-icon-large">🎵</span>
-                                        </div>
-                                        <div class="track-details-large">
-                                            <h2 class="track-title-large">Blinding Lights</h2>
-                                            <h3 class="artist-name-large">The Weeknd</h3>
-                                        </div>
-                                        <div class="player-controls-large">
-                                            <button class="ctrl-btn-lg">⏮</button>
-                                            <button class="ctrl-btn-lg play-pause">▶</button>
-                                            <button class="ctrl-btn-lg">⏭</button>
-                                        </div>
-                                        <div class="progress-bar-lg">
-                                            <div class="progress-fill" style="width: 45%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="playlist-side">
-                                        <h3>Up Next</h3>
-                                        <ul class="track-list">
-                                            <li class="track-item active">
-                                                <span class="track-num">1</span>
-                                                <div class="track-meta">
-                                                    <span class="t-title">Blinding Lights</span>
-                                                    <span class="t-artist">The Weeknd</span>
-                                                </div>
-                                                <span class="t-time">3:20</span>
-                                            </li>
-                                            <li class="track-item">
-                                                <span class="track-num">2</span>
-                                                <div class="track-meta">
-                                                    <span class="t-title">Save Your Tears</span>
-                                                    <span class="t-artist">The Weeknd</span>
-                                                </div>
-                                                <span class="t-time">3:35</span>
-                                            </li>
-                                            <li class="track-item">
-                                                <span class="track-num">3</span>
-                                                <div class="track-meta">
-                                                    <span class="t-title">Starboy</span>
-                                                    <span class="t-artist">The Weeknd, Daft Punk</span>
-                                                </div>
-                                                <span class="t-time">3:50</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- VIEW 3: VIDEO (YouTube/Netflix) -->
-                            <div class="app-view" id="view-video">
-                                <div class="video-hub-layout">
-                                    <div class="featured-video">
-                                        <div class="video-frame">
-                                            <div class="play-overlay">▶</div>
-                                        </div>
-                                        <div class="video-info">
-                                            <h3>Top Gear: The Ultimate Road Trip</h3>
-                                            <p>Season 22 • Episode 4 • 45m remaining</p>
-                                        </div>
-                                    </div>
-                                    <div class="video-grid">
-                                        <h3>Recommended for You</h3>
-                                        <div class="video-thumbnails">
-                                            <div class="vid-thumb"></div>
-                                            <div class="vid-thumb"></div>
-                                            <div class="vid-thumb"></div>
-                                            <div class="vid-thumb"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                        <div class="connected-device-info">
+                            <div class="device-status-dot connected"></div>
+                            <span>iPhone 15 Pro connected via USB</span>
                         </div>
                     </div>
                 </section>
@@ -996,6 +872,269 @@
         </footer>
     </div>
 
+    <!-- ============================================
+         CARPLAY OVERLAY (Inside Infotainment Screen)
+         ============================================ -->
+    <div id="carplay-overlay" class="carplay-overlay">
+
+        <!-- Common Sidebar for both modes -->
+        <div class="carplay-sidebar">
+            <div class="sidebar-top">
+                <button class="sidebar-icon" title="Maps">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                    </svg>
+                </button>
+                <button class="sidebar-icon" title="Music">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+                    </svg>
+                </button>
+                <button class="sidebar-icon" title="Phone">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="sidebar-middle">
+                <button class="sidebar-switch-btn" id="sidebar-switch-btn" onclick="toggleCarPlayMode()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" id="switch-icon-ios"
+                        style="display: none;">
+                        <path
+                            d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83z" />
+                    </svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" id="switch-icon-android">
+                        <path
+                            d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="sidebar-bottom">
+                <button class="sidebar-back-btn" onclick="closeCarPlay()" title="Back to Car">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- iOS CarPlay Mode -->
+        <div id="ios-carplay" class="carplay-content ios-carplay-content">
+            <div class="carplay-header">
+                <span class="carplay-time" id="ios-time">9:41</span>
+                <span class="carplay-carrier">LTE</span>
+            </div>
+            <div class="carplay-app-grid">
+                <div class="carplay-app-icon">
+                    <div class="icon-wrapper" style="background: linear-gradient(180deg, #5CD85F 0%, #2FB032 100%);">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path
+                                d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                        </svg>
+                    </div>
+                    <span class="icon-label">Phone</span>
+                </div>
+                <div class="carplay-app-icon">
+                    <div class="icon-wrapper" style="background: linear-gradient(180deg, #FC5C7D 0%, #E91E63 100%);">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path
+                                d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+                        </svg>
+                    </div>
+                    <span class="icon-label">Music</span>
+                </div>
+                <div class="carplay-app-icon">
+                    <div class="icon-wrapper" style="background: linear-gradient(180deg, #4ECDC4 0%, #2BAD95 100%);">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path
+                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                        </svg>
+                    </div>
+                    <span class="icon-label">Maps</span>
+                </div>
+                <div class="carplay-app-icon">
+                    <div class="icon-wrapper" style="background: linear-gradient(180deg, #5CD85F 0%, #2FB032 100%);">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path
+                                d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" />
+                        </svg>
+                    </div>
+                    <span class="icon-label">Messages</span>
+                </div>
+                <div class="carplay-app-icon">
+                    <div class="icon-wrapper" style="background: linear-gradient(180deg, #fff 0%, #f0f0f0 100%);">
+                        <div class="now-playing-bars">
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <span class="icon-label" style="color: #fff;">Now Playing</span>
+                </div>
+                <div class="carplay-app-icon">
+                    <div class="icon-wrapper" style="background: linear-gradient(180deg, #9B59B6 0%, #8E44AD 100%);">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path
+                                d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z" />
+                        </svg>
+                    </div>
+                    <span class="icon-label">Podcasts</span>
+                </div>
+                <div class="carplay-app-icon">
+                    <div class="icon-wrapper" style="background: linear-gradient(180deg, #FF9500 0%, #FF7500 100%);">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path
+                                d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z" />
+                        </svg>
+                    </div>
+                    <span class="icon-label">Audiobooks</span>
+                </div>
+                <div class="carplay-app-icon">
+                    <div class="icon-wrapper" style="background: linear-gradient(180deg, #FF3B30 0%, #D63031 100%);">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path
+                                d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" />
+                        </svg>
+                    </div>
+                    <span class="icon-label">News</span>
+                </div>
+                <div class="carplay-app-icon">
+                    <div class="icon-wrapper" style="background: #fff;">
+                        <div class="calendar-content">
+                            <span class="calendar-day">Tue</span>
+                            <span class="calendar-date">1</span>
+                        </div>
+                    </div>
+                    <span class="icon-label" style="color: #fff;">Calendar</span>
+                </div>
+                <div class="carplay-app-icon">
+                    <div class="icon-wrapper" style="background: linear-gradient(180deg, #8E8E93 0%, #636366 100%);">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path
+                                d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+                        </svg>
+                    </div>
+                    <span class="icon-label">Settings</span>
+                </div>
+            </div>
+            <div class="carplay-footer">
+                <div class="footer-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Android Auto Mode -->
+        <div id="android-auto" class="carplay-content android-auto-content" style="display: none;">
+            <div class="carplay-header">
+                <span class="carplay-time" id="android-time">12:32</span>
+            </div>
+            <div class="carplay-app-grid">
+                <div class="carplay-app-icon">
+                    <div class="icon-wrapper"
+                        style="background: linear-gradient(135deg, #4285F4, #34A853, #FBBC05, #EA4335);">
+                        <span style="font-size: 28px; font-weight: bold; color: white;">G</span>
+                    </div>
+                    <span class="icon-label">Google</span>
+                </div>
+                <div class="carplay-app-icon">
+                    <div class="icon-wrapper" style="background: linear-gradient(180deg, #4285F4 0%, #2D6BC7 100%);">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path
+                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                        </svg>
+                    </div>
+                    <span class="icon-label">Maps</span>
+                </div>
+                <div class="carplay-app-icon">
+                    <div class="icon-wrapper" style="background: linear-gradient(180deg, #1DB954 0%, #169C46 100%);">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.59 14.42c-.17.29-.54.38-.83.21-2.28-1.39-5.15-1.71-8.53-.93-.33.08-.66-.14-.73-.46-.07-.33.15-.65.47-.73 3.73-.85 6.94-.46 9.51 1.11.29.17.38.54.21.83z" />
+                        </svg>
+                    </div>
+                    <span class="icon-label">Spotify</span>
+                </div>
+                <div class="carplay-app-icon">
+                    <div class="icon-wrapper" style="background: linear-gradient(180deg, #FF0000 0%, #CC0000 100%);">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path
+                                d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+                        </svg>
+                    </div>
+                    <span class="icon-label">YT Music</span>
+                </div>
+                <div class="carplay-app-icon">
+                    <div class="icon-wrapper" style="background: linear-gradient(180deg, #34C759 0%, #28A745 100%);">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path
+                                d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                        </svg>
+                    </div>
+                    <span class="icon-label">Phone</span>
+                </div>
+                <div class="carplay-app-icon">
+                    <div class="icon-wrapper" style="background: linear-gradient(180deg, #FF9500 0%, #E08600 100%);">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path
+                                d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />
+                        </svg>
+                    </div>
+                    <span class="icon-label">Audible</span>
+                </div>
+                <div class="carplay-app-icon">
+                    <div class="icon-wrapper" style="background: linear-gradient(180deg, #C6002B 0%, #A00023 100%);">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                        </svg>
+                    </div>
+                    <span class="icon-label">iHeartRadio</span>
+                </div>
+                <div class="carplay-app-icon">
+                    <div class="icon-wrapper" style="background: linear-gradient(180deg, #F43E37 0%, #D32F2F 100%);">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                        </svg>
+                    </div>
+                    <span class="icon-label">Pocket Casts</span>
+                </div>
+                <div class="carplay-app-icon">
+                    <div class="icon-wrapper" style="background: linear-gradient(180deg, #33CCFF 0%, #1DB8E8 100%);">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                        </svg>
+                    </div>
+                    <span class="icon-label">Waze</span>
+                </div>
+                <div class="carplay-app-icon">
+                    <div class="icon-wrapper" style="background: linear-gradient(180deg, #7C4DFF 0%, #651FFF 100%);">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path
+                                d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+                        </svg>
+                    </div>
+                    <span class="icon-label">Settings</span>
+                </div>
+            </div>
+            <div class="carplay-footer">
+                <div class="media-controls">
+                    <div class="media-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#1DB954">
+                            <circle cx="12" cy="12" r="10" />
+                        </svg>
+                    </div>
+                    <button class="media-btn">⏮</button>
+                    <button class="media-btn">⏸</button>
+                    <button class="media-btn">⏭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Update time
         function updateTime() {
@@ -1006,9 +1145,87 @@
             hours = hours % 12;
             hours = hours ? hours : 12;
             document.getElementById('current-time').textContent = `${hours}:${minutes} ${ampm}`;
+
+            // Update CarPlay times
+            const iosTime = document.getElementById('ios-time');
+            const androidTime = document.getElementById('android-time');
+            if (iosTime) iosTime.textContent = `${hours}:${minutes}`;
+            if (androidTime) androidTime.textContent = `${hours}:${minutes}`;
         }
         updateTime();
         setInterval(updateTime, 1000);
+
+        // ============================================
+        // CARPLAY FUNCTIONS
+        // ============================================
+        function openCarPlay(mode) {
+            const overlay = document.getElementById('carplay-overlay');
+            const iosMode = document.getElementById('ios-carplay');
+            const androidMode = document.getElementById('android-auto');
+            const iosIcon = document.getElementById('switch-icon-ios');
+            const androidIcon = document.getElementById('switch-icon-android');
+
+            // Hide both modes first
+            iosMode.style.display = 'none';
+            androidMode.style.display = 'none';
+
+            // Show selected mode
+            if (mode === 'ios') {
+                iosMode.style.display = 'flex';
+                if (iosIcon) iosIcon.style.display = 'none';
+                if (androidIcon) androidIcon.style.display = 'block';
+                currentCarPlayMode = 'ios';
+            } else if (mode === 'android') {
+                androidMode.style.display = 'flex';
+                if (iosIcon) iosIcon.style.display = 'block';
+                if (androidIcon) androidIcon.style.display = 'none';
+                currentCarPlayMode = 'android';
+            }
+
+            // Show overlay with animation
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Update time for CarPlay
+            updateTime();
+        }
+
+        function closeCarPlay() {
+            const overlay = document.getElementById('carplay-overlay');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Toggle between iOS and Android modes
+        let currentCarPlayMode = 'ios';
+        function toggleCarPlayMode() {
+            const iosMode = document.getElementById('ios-carplay');
+            const androidMode = document.getElementById('android-auto');
+            const iosIcon = document.getElementById('switch-icon-ios');
+            const androidIcon = document.getElementById('switch-icon-android');
+
+            if (currentCarPlayMode === 'ios') {
+                iosMode.style.display = 'none';
+                androidMode.style.display = 'flex';
+                iosIcon.style.display = 'block';
+                androidIcon.style.display = 'none';
+                currentCarPlayMode = 'android';
+            } else {
+                iosMode.style.display = 'flex';
+                androidMode.style.display = 'none';
+                iosIcon.style.display = 'none';
+                androidIcon.style.display = 'block';
+                currentCarPlayMode = 'ios';
+            }
+            updateTime();
+        }
+
+        // Close CarPlay with Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeCarPlay();
+            }
+        });
 
         // Screen Navigation
         const navItems = document.querySelectorAll('.nav-item');
