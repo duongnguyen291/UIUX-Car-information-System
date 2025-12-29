@@ -1741,7 +1741,8 @@ body {
 /* Quick Access Grids */
 .quick-access-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    /* Adjusted ratio: smaller door section (0.8fr), larger lights section (1.2fr) */
+    grid-template-columns: 0.8fr 1.2fr;
     gap: var(--spacing-md);
 }
 
@@ -2119,24 +2120,25 @@ body {
 }
 
 /* External Button Positions */
+/* External Button Positions - Tighter to accommodate smaller width */
 .door-action-btn.fl-ext {
-    top: 20px;
-    left: 20px;
+    top: 15px;
+    left: 15px;
 }
 
 .door-action-btn.fr-ext {
-    top: 20px;
-    right: 20px;
+    top: 15px;
+    right: 15px;
 }
 
 .door-action-btn.rl-ext {
-    bottom: 20px;
-    left: 20px;
+    bottom: 15px;
+    left: 15px;
 }
 
 .door-action-btn.rr-ext {
-    bottom: 20px;
-    right: 20px;
+    bottom: 15px;
+    right: 15px;
 }
 
 @keyframes pulse-glow {
@@ -5467,4 +5469,48 @@ body {
 /* Child Lock Button */
 .action-btn.child-lock.active {
     color: var(--accent-yellow);
+}
+
+/* ============================================
+   Enhanced Interior Lighting Buttons (Requested Resize)
+   ============================================ */
+.zone-toggle {
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    min-width: 90px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+}
+
+.zone-toggle.active {
+    background: rgba(0, 163, 255, 0.2);
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+    box-shadow: 0 0 10px rgba(0, 163, 255, 0.3);
+}
+
+.color-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    height: 44px;
+    min-width: 80px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+}
+
+.color-btn.active {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
 }
