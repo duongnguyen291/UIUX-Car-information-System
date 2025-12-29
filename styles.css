@@ -645,7 +645,7 @@ body {
     background: #000;
     z-index: 1000;
     display: flex;
-    background-image: url('public/ios-background.jpg');
+    background-image: url('./public/ios-background.jpg');
     background-size: cover;
     background-position: center;
 }
