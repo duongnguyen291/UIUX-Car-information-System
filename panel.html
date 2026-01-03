@@ -167,8 +167,8 @@
             background: #fff;
             border-radius: 50%;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-            margin-top: -1px;
-            /* Align hack */
+            margin-top: 7px;
+            /* (32px track - 18px thumb) / 2 */
         }
 
         input[type=range]::-webkit-slider-runnable-track {
@@ -205,11 +205,12 @@
             height: 20px;
         }
 
-        /* Massage Grid */
+        /* Updated Massage Styles */
         .massage-container {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 16px;
+            /* Increased gap */
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-light);
             border-radius: 24px;
@@ -222,30 +223,72 @@
             align-items: center;
         }
 
-        .power-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: 1px solid var(--border-light);
+        .toggle-switch-container {
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: var(--text-sub);
+            gap: 8px;
+            background: #0f172a;
+            padding: 4px 6px 4px 12px;
+            border-radius: 99px;
+            /* Pill shape */
+            border: 1px solid var(--border-light);
             cursor: pointer;
+        }
+
+        .toggle-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .toggle-track {
+            width: 40px;
+            height: 22px;
+            background: var(--accent);
+            border-radius: 12px;
+            position: relative;
             transition: 0.3s;
         }
 
-        .power-btn.active {
-            background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
+        .toggle-thumb {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            border-radius: 50%;
+            transition: 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="checkbox"]#msg-pwr {
+            display: none;
+        }
+
+        /* Logic for off state */
+        input[type="checkbox"]#msg-pwr:not(:checked)~.toggle-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        input[type="checkbox"]#msg-pwr:not(:checked)~.toggle-track .toggle-thumb {
+            right: 20px;
+            /* Move to left */
+            background: #94a3b8;
+        }
+
+        input[type="checkbox"]#msg-pwr:not(:checked)~.toggle-label {
+            color: var(--text-sub);
         }
 
         .massage-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            opacity: 0.4;
+            grid-template-columns: 1fr 1fr;
+            /* 2x2 Grid */
+            grid-gap: 12px;
+            opacity: 0.5;
             pointer-events: none;
             transition: 0.3s;
         }
@@ -256,31 +299,57 @@
         }
 
         .mode-item {
-            aspect-ratio: 1;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
+            aspect-ratio: 1.4;
+            /* Rectangular cards */
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            gap: 8px;
             color: var(--text-sub);
             cursor: pointer;
             transition: 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
         }
 
         .mode-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         .mode-item.selected {
-            background: rgba(6, 182, 212, 0.15);
-            color: var(--accent);
+            background: rgba(6, 182, 212, 0.1);
             border: 1px solid var(--accent);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.15);
+        }
+
+        .mode-icon-circle {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid var(--text-sub);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .mode-item.selected .mode-icon-circle {
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
         .mode-item svg {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
+        }
+
+        .mode-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-main);
         }
 
         /* RECLINE */
@@ -413,8 +482,34 @@
         <!-- Window Control -->
         <div class="control-row">
             <div class="main-icon">
-                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                <!-- Custom Car Door + Arrows Icon -->
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M19 20H5a2 2 0 01-2-2V9a2 2 0 012-2h1l2-3h8l2 3h1a2 2 0 012 2v9a2 2 0 01-2 2zM5 14h14m-9-9v3m4-3v3M9 17l3 3m0 0l3-3m-3 3v-6" />
+                    <!-- Attempting a door shape: 
+                         Outer: Box with angled top.
+                         Inner: Up/Down arrows? 
+                         Let's try a cleaner path for the specific request "Door with Arrows"
+                    -->
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 10h16v10H4z M4 10l2-4h12l2 4"
+                        opacity="0.2" /> <!-- Glass hint -->
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v3m-2-1l2-2 2 2" />
+                    <!-- Up Arrow in window -->
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-3m-2 1l2 2 2-2" />
+                    <!-- Down Arrow in door -->
+                </svg>
+                <!-- Retrying a clean, recognizable vector based on the image provided: 
+                     Door outline + Arrows inside used as the visual 
+                -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    style="position:absolute; background:var(--panel-bg);">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2h-1.5L14 3H8L4.5 6H3a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 5.5l0 2.5 m-1.5-1.5 1.5-1.5 1.5 1.5" />
+                    <!-- Mini Up Arrow -->
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 17.5l0-2.5 m-1.5 1.5 1.5 1.5 1.5-1.5" />
+                    <!-- Mini Down Arrow -->
                 </svg>
             </div>
             <div class="control-content">
@@ -436,51 +531,65 @@
         <!-- Massage -->
         <div class="massage-container">
             <div class="massage-top">
-                <div class="main-icon"
-                    style="background:transparent; padding:0; justify-content:flex-start; width:auto;">
-                    <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M15.536 15.536a5 5 0 00-7.072 0M12 6.5a14.88 14.88 0 00-6.105 1.295A2.32 2.32 0 005.8 8c.254.496.678.89 1.185 1.107l.084.036c.642.274 1.346.423 2.052.423 1.94 0 3.73-.594 5.234-1.615l.024-.016.024.016c1.503 1.02 3.294 1.615 5.234 1.615.706 0 1.41-.149 2.052-.423l.084-.036c.507-.217.931-.611 1.185-1.107a2.32 2.32 0 00-.095-.205A14.88 14.88 0 0012 6.5z">
-                        </path>
-                    </svg>
-                </div>
-                <div class="power-btn" id="msg-pwr" onclick="toggleMassage()">
-                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"
-                        viewBox="0 0 24 24">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                        style="color:var(--accent);">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
+                    <span
+                        style="font-weight: 700; letter-spacing: 1px; font-size: 0.8rem; color: var(--text-sub);">MASSAGE</span>
                 </div>
+
+                <label class="toggle-switch-container">
+                    <span class="toggle-label" id="pwr-text">ON</span>
+                    <input type="checkbox" id="msg-pwr" onchange="toggleMassage(this)">
+                    <div class="toggle-track">
+                        <div class="toggle-thumb"></div>
+                    </div>
+                </label>
             </div>
+
             <div class="massage-grid" id="msg-grid">
                 <div class="mode-item selected" onclick="setMsgMode(this)">
-                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
-                        </path>
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                        </path>
-                    </svg>
+                    <div class="mode-icon-circle">
+                        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                            </path>
+                        </svg>
+                    </div>
+                    <span class="mode-label">Wave</span>
                 </div>
                 <div class="mode-item" onclick="setMsgMode(this)">
-                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
+                    <div class="mode-icon-circle">
+                        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <span class="mode-label">Pulse</span>
                 </div>
                 <div class="mode-item" onclick="setMsgMode(this)">
-                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
-                        </path>
-                    </svg>
+                    <div class="mode-icon-circle">
+                        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <span class="mode-label">Knead</span>
                 </div>
                 <div class="mode-item" onclick="setMsgMode(this)">
-                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
-                    </svg>
+                    <div class="mode-icon-circle">
+                        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                            </path>
+                        </svg>
+                    </div>
+                    <span class="mode-label">SOS</span>
                 </div>
             </div>
         </div>
@@ -574,11 +683,13 @@
             document.getElementById('seat-back-viz').style.transform = `rotate(-${val * 0.75}deg)`;
         }
 
-        function toggleMassage() {
-            const btn = document.getElementById('msg-pwr');
+        function toggleMassage(checkbox) {
             const grid = document.getElementById('msg-grid');
-            btn.classList.toggle('active');
-            grid.classList.toggle('active');
+            if (checkbox.checked) {
+                grid.classList.add('active');
+            } else {
+                grid.classList.remove('active');
+            }
         }
 
         function setMsgMode(el) {
